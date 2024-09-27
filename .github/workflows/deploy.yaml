@@ -29,7 +29,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           username: _json_key
-          password: ${{ secrets.gcp_credentials_json }}
+          password: ${{ secrets.GCP_CREDENTIALS_JSON }}
           registry: asia-south1.docker.pkg.dev
       - name: Build and push the container
         id: docker-build-push
@@ -42,9 +42,9 @@ jobs:
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: ${{ cloud-run-deployments }}
-          region: ${{ asia-south1 }}
-          image: ${{ asia-south1-docker.pkg.dev/marketfeed-stage/test-cloud-run-deployment/cloud-run-deployments }}:${{ github.sha }}
+          service: cloud-run-deployments
+          region: asia-south1
+          image: asia-south1-docker.pkg.dev/marketfeed-stage/test-cloud-run-deployment/cloud-run-deployments:${{ github.sha }}
           env_vars: ${{ secrets.ENV_VARS }}
       - name: Output service URL
         run: echo ${{ steps.deploy.outputs.url }}
