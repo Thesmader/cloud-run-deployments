@@ -30,7 +30,7 @@ jobs:
         with:
           username: _json_key
           password: ${{ secrets.GCP_CREDENTIALS_JSON }}
-          registry: asia-south1.docker.pkg.dev
+          registry: asia-south1-docker.pkg.dev
       - name: Build and push the container
         id: docker-build-push
         env:
