@@ -45,7 +45,7 @@ jobs:
           service: cloud-run-deployments
           region: asia-south1
           image: asia-south1-docker.pkg.dev/marketfeed-stage/test-cloud-run-deployment/cloud-run-deployments:${{ github.sha }}
-          env_vars: ${{ secrets.ENV_VARS }}
+          env_vars: "${{ secrets.ENV_VARS }}"
       - name: Output service URL
         run: echo ${{ steps.deploy.outputs.url }}
 
