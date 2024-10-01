@@ -10,4 +10,6 @@ jobs:
       - name: show secret
         id: show
         run: |
+          echo 'ENV_YAML<<EOF' >> $GITHUB_ENV
           echo ${{ secrets.ENV_VARS }} >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
