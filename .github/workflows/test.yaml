@@ -11,4 +11,4 @@ jobs:
         id: show
         run: |
           echo ${{ secrets.ENV_VARS }} > .env.yaml
-          cat .env.yaml | sed 's/./& /g'
+          cat .env.yaml
