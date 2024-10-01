@@ -35,13 +35,15 @@ jobs:
         id: docker-build-push
         env:
           build_tag: asia-south1-docker.pkg.dev/marketfeed-stage/test-cloud-run-deployment/cloud-run-deployments:${{ github.sha }}
-        run: |-
+        run: |
           docker build -t $build_tag .
           docker push $build_tag
       - name: Read env vars
         id: read-env-vars
         run: |
-          echo '::set-output name=ENV_VARS::${{secrets.ENV_VARS}}'
+          echo "ENV_VARS<<EOF" >> $GITHUB_OUTPUT
+          echo '${{secrets.ENV_VARS}}' >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
       - name: Deploy container to Cloud Run
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v2
