@@ -38,6 +38,10 @@ jobs:
         run: |-
           docker build -t $build_tag .
           docker push $build_tag
+      - name: Read env vars
+        id: read-env-vars
+        run: |
+          echo '::set-output name=ENV_VARS::${{secrets.ENV_VARS}}'
       - name: Deploy container to Cloud Run
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v2
@@ -45,7 +49,7 @@ jobs:
           service: cloud-run-deployments
           region: asia-south1
           image: asia-south1-docker.pkg.dev/marketfeed-stage/test-cloud-run-deployment/cloud-run-deployments:${{ github.sha }}
-          env_vars: "${{ secrets.ENV_VARS }}"
+          env_vars: ${{steps.read-env-vars.outputs.ENV_VARS}}
       - name: Output service URL
         run: echo ${{ steps.deploy.outputs.url }}
 
