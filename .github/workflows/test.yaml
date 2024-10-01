@@ -10,5 +10,4 @@ jobs:
       - name: show secret
         id: show
         run: |
-          echo "${{ secrets.ENV_VARS }}" > .env.yaml
-          cat .env.yaml
+          echo "${{ secrets.ENV_VARS }}" >> $GITHUB_ENV
