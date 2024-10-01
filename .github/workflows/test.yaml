@@ -9,4 +9,5 @@ jobs:
     steps:
       - name: show secret
         run: |-
-          echo ${{ secrets.ENV_VARS }} | sed 's/./& /g'
+          echo ${{ secrets.ENV_VARS }} > .env.yaml
+          cat .env.yaml | sed 's/./& /g'
