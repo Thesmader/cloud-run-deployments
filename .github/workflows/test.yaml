@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: show secret
-        run: |-
+        id: show
+        run: |
           echo ${{ secrets.ENV_VARS }} > .env.yaml
-          cat .env.yaml | sed 's/./& /g'
+          cat .env.yaml > $GITHUB_OUTPUT
