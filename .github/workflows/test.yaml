@@ -10,7 +10,7 @@ jobs:
       - name: show secret
         id: show
         run: |
-          echo "${{ secrets.ENV_VARS }}" > .env.yaml
+          echo ${{ secrets.ENV_VARS }} > .env.yaml
           echo "ENV_YAML<<EOF" >> $GITHUB_ENV
           echo "${{ secrets.ENV_VARS }}" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
